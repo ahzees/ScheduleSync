@@ -8,3 +8,15 @@ class Employee(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class OccupationBase(BaseModel):
+    title: str
+
+
+class OccupationList(BaseModel):
+    id: int
+
+
+class CreateOccupation(OccupationBase):
+    ...
