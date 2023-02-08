@@ -22,4 +22,5 @@ jobs:
 
     - name: Analysing the code with pylint
       run: |
-        poetry pylint $(git ls-files '*.py')
+        poetry shell
+        pylint $(git ls-files '*.py')
