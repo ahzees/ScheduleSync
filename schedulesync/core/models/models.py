@@ -5,14 +5,14 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Date
 class Occupation(Base):
     __tablename__ = "occupation"
     id = Column(Integer, primary_key=True, unique=True, index=True)
-    title = Column(String(250))
+    title = Column(String(250), unique=True)
 
 
 class Employee(Base):
     __tablename__ = "employee"
     id = Column(Integer, primary_key=True, unique=True, index=True)
     email = Column(String(250))
-    phone_number = Column(String(10))
+    phone_number = Column(String(15))
     first_name = Column(String(100))
     last_name = Column(String(100))
     date_of_birth = Column(Date)

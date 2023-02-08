@@ -1,13 +1,18 @@
 from pydantic import BaseModel
+from datetime import date
 
 
 class Employee(BaseModel):
-    id: int
+    email: str
+    phone_number: str
     first_name: str
     last_name: str
+    date_of_birth: date
+    occupation_id: int
 
-    class Config:
-        orm_mode = True
+
+class CreateEmployee(Employee):
+    ...
 
 
 class OccupationBase(BaseModel):
