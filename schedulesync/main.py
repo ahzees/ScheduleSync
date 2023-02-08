@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+# noqa: C0114
+import fastapi
 
-app = FastAPI()
+app = fastapi.FastAPI()
 app()
