@@ -25,4 +25,4 @@ jobs:
         poetry add pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        python -m poetry run pylint $(git ls-files '*.py')
