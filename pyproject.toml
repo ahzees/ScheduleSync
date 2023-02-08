@@ -13,8 +13,7 @@ pre-commit = "^3.0.4"
 
 [tool.pylint.'MESSAGES CONTROL']
 max-line-length = 120
-disable = "E0401, C0114"
-init-hook='import sys; sys.path.append(".")'
+disable = "C0114"
 
 [build-system]
 requires = ["poetry-core"]
