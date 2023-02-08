@@ -25,4 +25,5 @@ jobs:
         python -m poetry install
     - name: Analysing the code with pylint
       run: |
+        poetry add pylint
         pylint $(git ls-files '*.py')
