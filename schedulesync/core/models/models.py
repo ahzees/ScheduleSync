@@ -22,8 +22,7 @@ class Employee(Base):
 class Shift(Base):
     __tablename__ = "shift"
     employee_id = Column(
-        Integer, ForeignKey("employee.id"),
-        primary_key=True, index=True, unique=True
+        Integer, ForeignKey("employee.id"), primary_key=True, index=True, unique=True
     )
     id = Column(Integer)
 

@@ -22,7 +22,9 @@ def create_occupation(db: Session, item: CreateOccupation):
 
 
 def delete_occupation(db: Session, id: int):
-    db.query(Occupation).filter(Occupation.id == get_item(db, id, Occupation).id).delete()
+    db.query(Occupation).filter(
+        Occupation.id == get_item(db, id, Occupation).id
+    ).delete()
     db.commit()
     return {}
 
