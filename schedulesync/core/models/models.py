@@ -1,5 +1,5 @@
-from .db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from .db import Base
 
 
 class Occupation(Base):
