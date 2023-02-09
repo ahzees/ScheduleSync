@@ -3,8 +3,8 @@ from starlette.responses import Response
 from starlette.requests import Request
 
 
-from routes import routes
-from core.models.db import SessionLocal
+from schedulesync.routes import routes
+from schedulesync.core.models.db import SessionLocal
 
 app = FastAPI()
 
