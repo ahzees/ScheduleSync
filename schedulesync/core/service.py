@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import update
 from fastapi import HTTPException
-from schedulesync.core.models.models import *
+from schedulesync.core.models.models import Occupation, Employee
 from schedulesync.core.schemas.schema import CreateOccupation, CreateEmployee
 
 
