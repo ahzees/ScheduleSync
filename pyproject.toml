@@ -28,7 +28,7 @@ version = "0.1.0"
 tag_format = "v$version"
 update_changelog_on_bump = true
 version_files = [
-    "templateproject/__init__.py:version",
+    "schedulesync/__init__.py:version",
     "pyproject.toml:^version"
 ]
 
