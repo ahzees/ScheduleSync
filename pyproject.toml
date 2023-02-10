@@ -11,10 +11,53 @@ fastapi = "^0.89.1"
 typer = "^0.7.0"
 pre-commit = "^3.0.4"
 
+
+[tool.poetry.group.dev.dependencies]
+requests = "^2.28.2"
+pytest = "^7.2.1"
+types-requests = "^2.28.11.12"
+mypy = "^1.0.0"
+sqlalchemy = "^2.0.2"
+alembic = "^1.9.3"
+python-dotenv = "^0.21.1"
+commitizen = "^2.41.0"
+
+[tool.commitizen]
+name = "cz_customize"
+version = "0.1.0"
+tag_format = "v$version"
+update_changelog_on_bump = true
+version_files = [
+    "templateproject/__init__.py:version",
+    "pyproject.toml:^version"
+]
+
+[tool.commitizen.customize]
+message_template = "{{change_type}}:{% if show_message %} {{message}}{% endif %}"
+example = "feature: this feature enable customize through config file"
+schema = "<type>: <body>"
+bump_pattern = "^(major|minor|patch|hotfix)"
+bump_map = {"major" = "MAJOR", "minor" = "MINOR", "patch" = "PATCH", "hotfix" = "PATCH"}
+
 [tool.pylint.'MESSAGES CONTROL']
 max-line-length = 120
-disable = "C0114"
+disable = "C0114, C0115, R0903, C0116, W0622, W0611, C0103, C0415, W0614, E1101"
+extension-pkg-allow-list = ['pydantic']
+
+[tool.isort]
+profile = "black"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.semantic_release]
+version_variable = [
+    "schedulesync/__init__.py:__version__",
+    "pyproject.toml:version"
+]
+branch = "main"
+upload_to_pypi = false
+upload_to_release = true
+build_command = "pip install poetry && poetry build"
