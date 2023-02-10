@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from schedulesync import occupation
-from schedulesync import employee
+
+from schedulesync import employee, occupation
 
 routes = APIRouter()
 

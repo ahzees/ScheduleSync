@@ -1,8 +1,9 @@
-from sqlalchemy.orm import Session
-from sqlalchemy import update
 from fastapi import HTTPException
-from schedulesync.core.models.models import Occupation, Employee
-from schedulesync.core.schemas.schema import CreateOccupation, CreateEmployee
+from sqlalchemy import update
+from sqlalchemy.orm import Session
+
+from schedulesync.core.models.models import Employee, Occupation
+from schedulesync.core.schemas.schema import CreateEmployee, CreateOccupation
 
 
 def get_item(db, id, table):

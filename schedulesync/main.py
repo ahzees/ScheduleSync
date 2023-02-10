@@ -1,10 +1,9 @@
 from fastapi import FastAPI
-from starlette.responses import Response
 from starlette.requests import Request
+from starlette.responses import Response
 
-
-from schedulesync.routes import routes
 from schedulesync.core.models.db import SessionLocal
+from schedulesync.routes import routes
 
 app = FastAPI()
 

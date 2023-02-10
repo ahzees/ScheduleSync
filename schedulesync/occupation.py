@@ -1,14 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from schedulesync.core.service import (
-    get_occupation_list as g_occupation_list,
-    create_occupation as c_occupation,
-    delete_occupation as d_ocupation,
-    get_occupation as g_occupation,
-)
-from schedulesync.core.utils import get_db
-from schedulesync.core.schemas.schema import CreateOccupation
 
+from schedulesync.core.schemas.schema import CreateOccupation
+from schedulesync.core.service import create_occupation as c_occupation
+from schedulesync.core.service import delete_occupation as d_ocupation
+from schedulesync.core.service import get_occupation as g_occupation
+from schedulesync.core.service import get_occupation_list as g_occupation_list
+from schedulesync.core.utils import get_db
 
 router = APIRouter()
 

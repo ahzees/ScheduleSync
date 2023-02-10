@@ -44,6 +44,9 @@ max-line-length = 120
 disable = "C0114, C0115, R0903, C0116, W0622, W0611, C0103, C0415, W0614, E1101"
 extension-pkg-allow-list = ['pydantic']
 
+[tool.isort]
+profile = "black"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
