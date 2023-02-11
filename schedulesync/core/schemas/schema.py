@@ -26,3 +26,8 @@ class OccupationList(BaseModel):
 
 class CreateOccupation(OccupationBase):
     ...
+
+
+class Shift(BaseModel):
+    employee_id: int
+    id: int

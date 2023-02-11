@@ -7,7 +7,7 @@
 
 [Description list]
     fix: fixed release.yml
- 
+
 [Notes]
     <notes>
 - patch: created and added models and schemas to fastapi

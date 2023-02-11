@@ -2,8 +2,9 @@ from fastapi import HTTPException
 from sqlalchemy import update
 from sqlalchemy.orm import Session
 
-from schedulesync.core.models.models import Employee, Occupation
+from schedulesync.core.models.models import Employee, Occupation, Shift
 from schedulesync.core.schemas.schema import CreateEmployee, CreateOccupation
+from schedulesync.core.schemas.schema import Shift as ShiftSchema
 
 
 def get_item(db, id, table):
@@ -57,7 +58,39 @@ def delete_employee(db: Session, id: int):
 
 
 def update_employee(id: int, item: CreateEmployee, db: Session):
-    print(db.query(Employee).where(Employee.id == id).first())
     db.execute(update(Employee).where(Employee.id == id).values(**item.dict()))
     db.commit()
     return item
+
+
+def get_shift_list(db: Session):
+    return db.query(Shift).all()
+
+
+def create_shift(db: Session, item: ShiftSchema):
+    shift = Shift(**item.dict())
+    db.add(shift)
+    db.commit()
+    db.refresh(shift)
+    return shift
+
+
+def get_shift(db: Session, id: int):
+    return db.query(Shift).filter(Shift.id == id).all()
+
+
+def delete_shift(db: Session, id: int):
+    db.query(Shift).filter(Shift.employee_id == id).delete()
+    db.commit()
+    return {}
+
+
+def get_shift_by_employeer(db: Session, id: int):
+    return db.query(Shift).filter(Shift.employee_id == id).one()
+
+
+def delete_specific_shift(db: Session, id: int):
+    for i in db.query(Shift).filter(Shift.id == id):
+        db.delete(i)
+    db.commit()
+    return {}

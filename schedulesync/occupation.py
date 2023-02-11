@@ -11,22 +11,22 @@ from schedulesync.core.utils import get_db
 router = APIRouter()
 
 
-@router.get("/", status_code=200)
-def get_occupation_list(db: Session = Depends(get_db)):
+@router.get("/", status_code=200, summary="Get list of occupation`s")
+async def get_occupation_list(db: Session = Depends(get_db)):
     occupation_list = g_occupation_list(db)
     return occupation_list
 
 
-@router.get("/{id}", status_code=200)
-def get_occupation(id: int, db: Session = Depends(get_db)):
+@router.get("/{id}", status_code=200, summary="Get specific occupation")
+async def get_occupation(id: int, db: Session = Depends(get_db)):
     return g_occupation(id=id, db=db)
 
 
-@router.post("/", status_code=201)
-def create_occupation(item: CreateOccupation, db: Session = Depends(get_db)):
+@router.post("/", status_code=201, summary="Create occupation")
+async def create_occupation(item: CreateOccupation, db: Session = Depends(get_db)):
     return c_occupation(db, item)
 
 
-@router.delete("/{id}", status_code=200)
-def delete_occupation(id: int, db: Session = Depends(get_db)):
+@router.delete("/{id}", status_code=200, summary="Delete occupation")
+async def delete_occupation(id: int, db: Session = Depends(get_db)):
     return d_ocupation(db, id)
