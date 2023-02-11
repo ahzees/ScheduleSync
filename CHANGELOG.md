@@ -1,3 +1,34 @@
+## v0.1.2 (2023-02-11)
+
+
+- Merge pull request #5 from ahzees/matviystets-shift-CRUD
+- patch: added CRUD api for shift
+- hotfix: added CHANGELOG.md [Task]: schedulesync-crud-api-4
+- [Description list]
+fix: added CHANGELOG.md
+- [Notes]
+<notes>
+- hotfix: exclude CHANGELOG.md in pre-commit [Task]: schedulesync-crud-api-3
+- [Description list]
+fix: exclude CHANGELOG.md in pre-commit
+- [Notes]
+<notes>
+- hotfix: delete CHANGELOG.md [Task]: schedulesync-crud-api-2
+- [Description list]
+fix: delete CHANGELOG.md
+- [Notes]
+<notes>
+- hotfix: exclude CHANGELOG.md in pre-commit [Task]: schedulesync-crud-api-2
+- [Description list]
+fix: exclude CHANGELOG.md in pre-commit
+- [Notes]
+<notes>
+- patch: added CRUD api for shift [Task]: schedulesync-crud-api-1
+- [Description list]
+feat: added CRUD api for shift model
+- [Notes]
+<notes>
+
 ## v0.1.1 (2023-02-10)
 
 
