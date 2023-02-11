@@ -1,4 +1,5 @@
 .env
+CHANGELOG.md
 versions
 .DS_Store
 */**/.DS_Store
