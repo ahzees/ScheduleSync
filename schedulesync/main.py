@@ -5,7 +5,22 @@ from starlette.responses import Response
 from schedulesync.core.models.db import SessionLocal
 from schedulesync.routes import routes
 
-app = FastAPI()
+tags_metadata = [
+    {
+        "name": "Employee",
+        "description": "Operations with employeers",
+    },
+    {
+        "name": "Occupation",
+        "description": "Manage items. So _fancy_ they have their own docs.",
+    },
+    {
+        "name": "Shift",
+        "description": "Operatioins with shifts",
+    },
+]
+
+app = FastAPI(openapi_tags=tags_metadata)
 
 
 @app.middleware("http")

@@ -12,27 +12,27 @@ from schedulesync.core.utils import get_db
 router = APIRouter()
 
 
-@router.get("/", status_code=200)
+@router.get("/", status_code=200, tags=["Employee"])
 async def get_employee_list(db: Session = Depends(get_db)):
     employees = g_employee_list(db)
     return employees
 
 
-@router.get("/{id}", status_code=200)
+@router.get("/{id}", status_code=200, tags=["Employee"])
 async def get_employee(id: int, db: Session = Depends(get_db)):
     return g_employee(id=id, db=db)
 
 
-@router.post("/", status_code=201)
+@router.post("/", status_code=201, tags=["Employee"])
 async def create_employee(item: CreateEmployee, db: Session = Depends(get_db)):
     return c_employee(db, item)
 
 
-@router.delete("/{id}", status_code=200)
+@router.delete("/{id}", status_code=200, tags=["Employee"])
 async def delete_employee(id: int, db: Session = Depends(get_db)):
     return d_employee(db, id)
 
 
-@router.put("/{id}")
+@router.put("/{id}", tags=["Employee"])
 async def update_employee(id: int, item: Employee, db: Session = Depends(get_db)):
     return u_employee(db=db, id=id, item=item)
