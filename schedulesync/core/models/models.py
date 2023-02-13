@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Date, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .db import Base
 
@@ -51,3 +52,13 @@ class Timetable(Base):
     policy_id = Column(Integer, ForeignKey("policy.id"))
     working_days = Column(String(250))
     working_hours = Column(String(100))
+
+
+class User(Base):
+    __tablename__ = "user"
+    id = Column(Integer, primary_key=True, unique=True, index=True)
+    email = Column(String(150), unique=True, nullable=False)
+    hashed_password: Mapped[str] = mapped_column(String(length=1024), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
