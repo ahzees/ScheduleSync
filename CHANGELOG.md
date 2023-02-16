@@ -1,6 +1,14 @@
 ## v0.1.2 (2023-02-11)
 
 
+- Merge pull request #6 from ahzees/matviystets-merge
+- Merge branch 'main' into matviystets-merge
+- Delete pylint.yml
+- hotfix: updated project structure [Task]: schedulesync-fixworkflow
+- [Description list]
+fix: fix project structure
+- [Notes]
+<notes>
 - Merge pull request #5 from ahzees/matviystets-shift-CRUD
 - patch: added CRUD api for shift
 - hotfix: added CHANGELOG.md [Task]: schedulesync-crud-api-4
@@ -26,6 +34,12 @@ fix: exclude CHANGELOG.md in pre-commit
 - patch: added CRUD api for shift [Task]: schedulesync-crud-api-1
 - [Description list]
 feat: added CRUD api for shift model
+- [Notes]
+<notes>
+
+- fix: updated project structure [Task]: schedulesync-fixworkflow
+- [Description list]
+fix: fix project structure
 - [Notes]
 <notes>
 
