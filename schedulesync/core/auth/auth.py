@@ -11,7 +11,7 @@ cookie_transport = CookieTransport(cookie_name="schedule", cookie_max_age=3600)
 
 load_dotenv()
 
-SECRET = os.getenv("SECRET")
+SECRET = os.environ.get("SECRET")
 
 
 def get_jwt_strategy() -> JWTStrategy:
