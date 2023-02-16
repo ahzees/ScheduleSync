@@ -25,7 +25,7 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, future=True, echo=True)
 async_session_maker = async_sessionmaker(
     engine, autoflush=False, expire_on_commit=False
 )

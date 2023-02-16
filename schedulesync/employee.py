@@ -1,15 +1,14 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from pydantic.error_wrappers import ValidationError
 from sqlalchemy import insert, select, update
 from sqlalchemy.exc import NoResultFound
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 
 from schedulesync.core.auth.db import get_async_session
 from schedulesync.core.models.models import Employee
 from schedulesync.core.schemas.schema import CreateEmployee as CreateEmployeeSchema
 from schedulesync.core.schemas.schema import Employee as EmployeeSchema
-from schedulesync.core.schemas.schema import PutUpdateEmployee
+from schedulesync.core.schemas.schema import PatchUpdateEmployee
 
 router = APIRouter()
 
@@ -36,6 +35,7 @@ async def create_employee(
     item: CreateEmployeeSchema, db: Session = Depends(get_async_session)
 ):
     employee = insert(Employee).values(**item.dict()).returning(Employee.id)
+    print(employee)
     result = await db.execute(employee)
     await db.commit()
     return (
@@ -74,14 +74,13 @@ async def put_update_employee(
 
 @router.patch("/{id}", tags=["Employee"])
 async def patch_update_employee(
-    id: int, item: PutUpdateEmployee, db: Session = Depends(get_async_session)
+    id: int, item: PatchUpdateEmployee, db: Session = Depends(get_async_session)
 ):
     try:
         dct = {}
         for i in item.__dict__:
             if item.__dict__[i] != None:
                 dct[i] = item.__dict__[i]
-        print(dct)
         _update = (
             update(Employee).where(Employee.id == id).values(dct).returning(Employee)
         )
