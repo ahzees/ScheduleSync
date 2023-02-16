@@ -9,12 +9,12 @@ from fastapi_users import BaseUserManager, IntegerIDMixin
 from .db import User, get_user_db
 
 load_dotenv()
-SECRET2 = os.getenv("SECRET1")
+SECRET_PASSWORD_TOKEN = os.getenv("SECRET_PASSWORD_TOKEN")
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, uuid.UUID]):
-    reset_password_token_secret = SECRET2
-    verification_token_secret = SECRET2
+    reset_password_token_secret = SECRET_PASSWORD_TOKEN
+    verification_token_secret = SECRET_PASSWORD_TOKEN
 
     async def on_after_register(self, user: User, request: Optional[Request] = None):
         print(f"User {user.id} has registered.")
