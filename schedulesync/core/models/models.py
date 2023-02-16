@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from .db import Base
+from schedulesync.core.auth.db import Base
 
 
 class Occupation(Base):
@@ -55,6 +55,7 @@ class Timetable(Base):
 
 
 class User(Base):
+    __table_args__ = {"extend_existing": True}
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, unique=True, index=True)
     email = Column(String(150), unique=True, nullable=False)

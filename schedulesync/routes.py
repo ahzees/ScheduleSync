@@ -16,7 +16,7 @@ fastapi_users = FastAPIUsers[User, int](
 current_user = fastapi_users.current_user()
 
 
-@routes.get("/protected-route")
+@routes.get("/protected-route", tags=["profile"])
 def protected_route(user: User = Depends(current_user)):
     return {"Hello": user.email}
 

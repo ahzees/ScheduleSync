@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL1")
+DATABASE_URL = os.getenv("ASYNC_DATABASE_URL")
 
 
 class Base(DeclarativeBase):
@@ -26,7 +26,9 @@ class User(SQLAlchemyBaseUserTable[int], Base):
 
 
 engine = create_async_engine(DATABASE_URL)
-async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
+async_session_maker = async_sessionmaker(
+    engine, autoflush=False, expire_on_commit=False
+)
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
