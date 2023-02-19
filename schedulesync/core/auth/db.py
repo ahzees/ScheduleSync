@@ -1,15 +1,15 @@
-import os
 from typing import AsyncGenerator
 
-from dotenv import load_dotenv
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-load_dotenv()
-DATABASE_URL = os.getenv("ASYNC_DATABASE_URL")
+from schedulesync.core.settings import Settings
+
+settings = Settings()
+DATABASE_URL = settings.ASYNC_DATABASE_URL
 
 
 class Base(DeclarativeBase):
