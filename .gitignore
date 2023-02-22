@@ -1,4 +1,8 @@
 .env
+/*/**/database.drawio
+.vscode
+.mypy_cache
+.pytest_cache
 versions
 .DS_Store
 */**/.DS_Store

@@ -36,6 +36,7 @@ fix: exclude CHANGELOG.md in pre-commit
 feat: added CRUD api for shift model
 - [Notes]
 <notes>
+
 - fix: updated project structure [Task]: schedulesync-fixworkflow
 - [Description list]
 fix: fix project structure
