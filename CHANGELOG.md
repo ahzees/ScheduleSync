@@ -1,3 +1,56 @@
+## v0.1.3 (2023-02-22)
+
+
+- Merge pull request #8 from ahzees/matviystets-auth
+- patch: added jwt authorization
+- chore: deleted service.py due to to unnecessary usage [Task]: schedulesync-auth-7
+- [Description list]
+refactor: deleted service.py due to to unnecessary usage
+- [Notes]
+<notes>
+- hotfix: removed poetry-dotenv-plugin due to use of pydantic [Task]: schedulesync-auth-6
+- [Description list]
+fix: removed poetry-dotenv-plugin due to use of pydantic config
+- [Notes]
+<notes>
+- chore: added poetry-dotenv-plugin [Task]: schedulesync-auth-5
+- [Description list]
+perf: added poetry-dotenv-plugin
+- [Notes]
+<notes>
+- patch: created CRUD api for timetable and policy [Task]: schedulesync-auth-4
+- [Description list]
+feat: created CRUD api for timetable and policy
+- [Notes]
+<notes>
+- hotfix: fixed name of  password token in auth/manager.py [Task]: schedulesync-auth-4
+- [Description list]
+fix: fixed name of password token in auth/manager.py
+- [Notes]
+<notes>
+- Merge branch 'main' into matviystets-auth
+- patch: refactoring db connection and CRUD api to async [Task]: schedulesync-auth-3
+- [Description list]
+refactor: refactoring db connection and employee/occupation/shift to async
+- [Notes]
+<notes>
+- chore: refactoring occupation`s db calls to async [Task]: schedulesync-auth-2
+- [Description list]
+refactor: refactoring database calls to async
+- [Notes]
+<notes>
+- patch: added jwt authorization [Task]: schedulesync-auth-1
+- [Description list]
+feat: added jwt authorization
+- [Notes]
+<notes>
+- chore: added docs to api docs [Task]: schedulesync-api-docs-1
+- [Description list]
+docs: added docs to fastapi auto docs
+- [Notes]
+<notes>
+- bump: version 0.1.1 → 0.1.2
+
 ## v0.1.2 (2023-02-11)
 
 
@@ -36,6 +89,7 @@ fix: exclude CHANGELOG.md in pre-commit
 feat: added CRUD api for shift model
 - [Notes]
 <notes>
+
 - fix: updated project structure [Task]: schedulesync-fixworkflow
 - [Description list]
 fix: fix project structure

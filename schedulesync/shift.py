@@ -1,70 +1,66 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
+from sqlalchemy import delete, insert, select
 from sqlalchemy.orm import Session
 
+from schedulesync.core.auth.db import get_async_session
+from schedulesync.core.models.models import Shift
 from schedulesync.core.schemas.schema import Shift as ShiftSchema
-from schedulesync.core.service import create_shift as c_shift
-from schedulesync.core.service import delete_shift as d_shift
-from schedulesync.core.service import delete_specific_shift as d_specific_shift
-from schedulesync.core.service import get_shift as g_shift
-from schedulesync.core.service import get_shift_by_employeer as g_shift_by_employeer
-from schedulesync.core.service import get_shift_list as g_shift_list
-from schedulesync.core.utils import get_db
 
 router = APIRouter()
 
 
 @router.get("/", status_code=200, summary="Get shift`s list", tags=["Shift"])
-def get_shift_list(db: Session = Depends(get_db)):
-    return g_shift_list(db)
+async def get_shifts(db: Session = Depends(get_async_session)):
+    return (await db.execute(select(Shift))).scalars().all()
 
 
-@router.post("/", status_code=201, summary="Create shift", tags=["Shift"])
-def create_shift(item: ShiftSchema, db: Session = Depends(get_db)):
-    return c_shift(db, item)
-
-
-# @router.delete("/{id}", summary="Delete shift in specific employeer")
-# def delete_shift(id: int, db: Session = Depends(get_db)):
-#     return d_shift(db=db, id=id)
+@router.get("/{id}", status_code=200, summary="Get shift", tags=["Shift"])
+async def get_shift(id: int, db: Session = Depends(get_async_session)):
+    if await db.scalar(select(Shift).where(Shift.shift == id)):
+        return (
+            (await db.execute(select(Shift).where(Shift.shift == id))).scalars().all()
+        )
+    return JSONResponse({"status": "Not found"}, status_code=404)
 
 
 @router.get(
-    "/by/{id}",
+    "/employee/{employee_id}",
     status_code=200,
-    summary="Get specific shift",
+    summary="Get the work shift of an employee",
     tags=["Shift"],
-    description="If u want to get specific employeer from shifts -> {employee_id}?q=employee<br>"
-    "If u want to get all employeers from specific shift -> {shift_id}?q=shift",
 )
-def get_shift(
-    id: int = 0,
-    q=Query(
-        "shift",
-        description="description goes here",
-    ),
-    db: Session = Depends(get_db),
-):
-    if q == "employee":
-        return g_shift_by_employeer(db=db, id=id)
-    if q == "shift":
-        return g_shift(db=db, id=id)
-    return HTTPException(status_code=404)
+async def get_employee_shift(id: int, db: Session = Depends(get_async_session)):
+    if await db.scalar(select(Shift).where(Shift.employee_id == id)):
+        return (
+            (await db.execute(select(Shift).where(Shift.employee_id == id)))
+            .scalars()
+            .one()
+        )
+    return JSONResponse({"status": "Not found"}, status_code=404)
 
 
-# @router.get("/{employee_id}", status_code=200, summary="Get shift by employeer")
-# def get_shift_by_employeer(employee_id: int, db: Session = Depends(get_db)):
-#     return g_shift_by_employeer(db=db, id=employee_id)
+@router.post("/", status_code=201, summary="Create shift", tags=["Shift"])
+async def create_shift(item: ShiftSchema, db: Session = Depends(get_async_session)):
+    shift = insert(Shift).values(**item.dict()).returning(Shift.shift)
+    result = await db.execute(shift)
+    await db.commit()
+    return (
+        await db.execute(select(Shift).where(Shift.shift == result.scalar_one()))
+    ).scalar_one()
+
+
+@router.delete("/{id}", summary="Delete shift", tags=["Shift"])
+async def delete_shift(id: int, db: Session = Depends(get_async_session)):
+    await db.execute(delete(Shift).where(Shift.shift == id))
+    await db.commit()
+    return JSONResponse({"status": "succesful"}, status_code=204)
 
 
 @router.delete(
-    "/{id}",
-    summary="Delete specific shift",
-    tags=["Shift"],
-    description="If u want to delete the shift -> {shift_id}?q=shift<br>"
-    "If u want to delete employee from shifts -> {employee_id}?q=employee",
+    "/employee/{id}", summary="Delete the work shift of an employee", tags=["Shift"]
 )
-def delete_specific_shift(id: int, q=None, db: Session = Depends(get_db)):
-    if q == "shift":
-        return d_specific_shift(id=id, db=db)
-    else:
-        return d_shift(db=db, id=id)
+async def delete_employee_shift(id: int, db: Session = Depends(get_async_session)):
+    await db.execute(delete(Shift).where(Shift.employee_id == id))
+    await db.commit()
+    return JSONResponse({"status": "succesful"}, status_code=204)
